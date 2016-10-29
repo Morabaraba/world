@@ -3,7 +3,10 @@
 -behaviour(application).
 
 -export([start/0, start/2, stop/0, stop/1]).
--export([add_dodos/1, add_cockroaches/1, kill_dodos/0, kill_cockroaches/0]).
+-export([ add_dodos/1, add_cockroaches/1
+        , dodos/0, cockroaches/0
+        , kill_dodos/0, kill_cockroaches/0
+        ]).
 
 
 start() -> application:ensure_all_started(?MODULE).
@@ -25,9 +28,15 @@ add_animals(N, Sup) ->
   add_animals(N-1 ,Sup).
 
 
-kill_dodos() -> kill_all(dodos).
+dodos() -> all(dodos).
 
-kill_cockroaches() -> kill_all(cockroaches).
+cockroaches() -> all(cockroaches).
 
-kill_all(Sup) ->
-  [exit(Animal, kill) || {_, Animal, _ , _} <- supervisor:which_children(Sup)].
+all(Sup) -> [Animal || {_, Animal, _ , _} <- supervisor:which_children(Sup)].
+
+
+kill_dodos() -> kill_all(dodos()).
+
+kill_cockroaches() -> kill_all(cockroaches()).
+
+kill_all(Animals) -> [exit(Animal, kill) || Animal <- Animals].

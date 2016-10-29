@@ -14,10 +14,12 @@ init(noargs) ->
   ChildSpecs = [#{ id      => dodos_sup
                  , start   => {animals_sup, start_link, [dodos]}
                  , restart => transient
+                 , type    => supervisor
                  }
               , #{ id      => cockroaches_sup
                  , start   => {animals_sup, start_link, [cockroaches]}
                  , restart => permanent
+                 , type    => supervisor
                  }
                 ],
    {ok, {SupFlags, ChildSpecs}}.
