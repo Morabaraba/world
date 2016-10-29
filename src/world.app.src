@@ -1,0 +1,17 @@
+{ application
+, world
+, [ {description, "A world with dodos and cockroaches"}
+  , {vsn, "1.0.0"}
+  , {id, "world"}
+  , {registered, []}
+  , {modules, []}
+  , {applications, [kernel, stdlib, sasl]}
+  , {mod, {world, []}}
+  , {env, []}
+  , {maintainers, ["elbrujohalcon"]}
+  , {licenses, ["Apache2"]}
+  , {links, [ {"Github", "https://github.com/elbrujohalcon/world"}
+            , {"Blog Post", "https://medium.com/erlang-battleground"}
+            ]}
+  ]
+}.
